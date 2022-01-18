@@ -68,6 +68,8 @@ These can be specified using environment variables
   * Default "Australia/Melbourne"
 * ISSUE_CLOSED_SECONDS: The amount of seconds to search after the last commit,  useful for Merge Requests that close their tickets a second after the commit.
   * Default 0
+* START_DATE_SHIFT: The amount of seconds to shift the value of timestamp that divides adjacent releases. Change it if you happen to notice one MR in two release notes.
+  * Default 0
 
 ## Building and Running locally
 
