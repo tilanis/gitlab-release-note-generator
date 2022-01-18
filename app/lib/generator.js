@@ -13,8 +13,16 @@ exports.generate = async () => {
   const [latestTag, secondLatestTag] = tags;
 
   if (!_.get(latestTag, "commit.committed_date") || !_.get(secondLatestTag, "commit.committed_date")) throw new Error(`Cannot find latest and second latest tag. Abort the program!`);
-  const startDate = _.get(secondLatestTag, "commit.committed_date");
+  let startDate = _.get(secondLatestTag, "commit.committed_date");
   let endDate = _.get(latestTag, "commit.committed_date");
+
+  // allow start date to be adjusted
+  if (Env.START_DATE_SHIFT > 0) {
+    Logger.debug(`startDate:        ${startDate}`);
+    Logger.debug(`Adding Seconds: ${Env.START_DATE_SHIFT}`);
+    startDate = Moment.tz(startDate, Env.TZ).add(Env.START_DATE_SHIFT, "seconds").utc().format();
+    Logger.debug(`New startDate:   ${startDate}`);
+  }
 
   // allow the end date to be adjusted by a few seconds to catch issues that are automatially closed by
   // a MR and are time stamped a few seconds later.
