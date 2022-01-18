@@ -9,3 +9,6 @@ exports.NODE_ENV = process.env.NODE_ENV;
 // will looks for issues closed this many seconds after the tag,  this may happen if the issue is merged via a MR and automatially closed
 // example -e GITLAB_ISSUE_SECOND_DELAY=60 will catch issues closed up to 60 seconds after the tag is created.
 exports.ISSUE_CLOSED_SECONDS = process.env.ISSUE_CLOSED_SECONDS || "0" 
+
+// this variable does similar thing as $ISSUE_CLOSED_SECONDS but works with startDate instead of endDate
+exports.START_DATE_SHIFT = process.env.START_DATE_SHIFT || "0" 
